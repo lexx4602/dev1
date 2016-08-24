@@ -36,6 +36,7 @@ a:hover
 		<a href='<?php echo site_url('Servers/projects')?>'>Проекты</a> |
 		<a href='<?php echo site_url('Servers/os')?>'>операционные системы</a> |
 		<a href='<?php echo site_url('Servers/troubles')?>'>Проблемы</a> |
+		<a href='<?php echo site_url('Servers/status')?>'>Статус</a> |
 		<a href='<?php echo site_url('Servers/workdata')?>'>Работа с серверами</a>
 	</div>
 	<div style='height:20px;'></div>  
