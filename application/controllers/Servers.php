@@ -49,7 +49,7 @@ class Servers extends CI_Controller {
             $crud->set_table('zones');
             $crud->set_subject('zones');
             $crud->required_fields('name');
-            $crud->columns('id', 'name','notes');
+            $crud->columns('zone_id', 'name','notes');
             $output = $crud->render();
             $this->view_output($output);
 
@@ -67,11 +67,14 @@ class Servers extends CI_Controller {
             $crud->set_table('servers');
             $crud->set_subject('Servers');
             $crud->required_fields('name');
-            $crud->set_relation_n_n('actors', 'film_actor', 'actor', 'film_id', 'actor_id', 'fullname','priority');
-            $crud->set_relation_n_n('actors', 'film_actor', 'actor', 'film_id', 'actor_id', 'fullname','priority');
-            $crud->set_relation_n_n('actors', 'film_actor', 'actor', 'film_id', 'actor_id', 'fullname','priority');
-            $crud->set_relation_n_n('actors', 'film_actor', 'actor', 'film_id', 'actor_id', 'fullname','priority');
-            $crud->columns('id', 'name', 'status', 'project_id', 'internet', 'os_id', 'cpu', 'hdd', 'ip_id', 'admin_id');
+            $crud->set_relation('os_id','os','release');
+            $crud->set_relation('status_id','status','statusname');
+            $crud->set_relation_n_n('projects', 'projectkey', 'projects', 'server_id', 'project_id',  'name');
+            $crud->set_relation_n_n('ip', 'ipkey', 'ipaddress', 'server_id', 'ip_id', 'ip');
+            $crud->set_relation_n_n('Admin', 'adminkey', 'users', 'admin_id', 'user_id', 'login');
+            $crud->set_relation_n_n('Owner', 'ownerkey', 'users', 'owner_id', 'user_id', 'login');
+
+            $crud->columns('id', 'name', 'ip','projects','status_id',  'internet', 'cpu', 'hdd','Owner','Admin');
             $output = $crud->render();
             $this->view_output($output);
 
@@ -88,7 +91,8 @@ class Servers extends CI_Controller {
             $crud->set_theme('datatables');
             $crud->set_table('ipaddress');
             $crud->set_subject('ipaddress');
-            $crud->required_fields('name','zone_id');
+            $crud->set_relation('zone_id','zones','name');
+            $crud->required_fields('ip','zone_id');
             $crud->columns('id', 'ip', 'zone_id');
             $output = $crud->render();
             $this->view_output($output);
@@ -107,13 +111,14 @@ class Servers extends CI_Controller {
             $crud->set_table('users');
             $crud->set_subject('users');
             $crud->required_fields('login','password','email');
-            $crud->columns('user_id', 'login', 'email');
+            $crud->columns('user_id', 'login', 'email','sername');
             $output = $crud->render();
             $this->view_output($output);
 
         } catch (Exception $e) {
             show_error($e->getMessage() . ' --- ' . $e->getTraceAsString());
         }
+
 
     }
 
@@ -150,7 +155,7 @@ class Servers extends CI_Controller {
             $crud->set_table('os');
             $crud->set_subject('os');
             $crud->required_fields('name','release');
-            $crud->columns('id', 'name', 'release');
+            $crud->columns('os_id', 'name', 'release');
             $output = $crud->render();
             $this->view_output($output);
 
@@ -168,6 +173,8 @@ class Servers extends CI_Controller {
             $crud->set_theme('datatables');
             $crud->set_table('troubles');
             $crud->set_subject('troubles');
+            $crud->set_relation('server_id','servers','name');
+            $crud->set_relation('user_id','users','login');
             $crud->required_fields('server_id','user_id','trouble');
             $crud->columns('id', 'server_id','user_id','trouble');
             $output = $crud->render();
@@ -186,6 +193,8 @@ class Servers extends CI_Controller {
             $crud->set_theme('datatables');
             $crud->set_table('workdata');
             $crud->set_subject('workdata');
+            $crud->set_relation('server_id','servers','name');
+            $crud->set_relation('user_id','users','login');
             $crud->required_fields('server_id','user_id','note');
             $crud->columns('id', 'server_id','user_id','note');
             $output = $crud->render();
@@ -197,6 +206,24 @@ class Servers extends CI_Controller {
 
     }
 
+    public function status()
+    {
+        try {
+            $crud = new grocery_CRUD();
+
+            $crud->set_theme('datatables');
+            $crud->set_table('status');
+            $crud->set_subject('status');
+            $crud->required_fields('statusname');
+            $crud->columns('status_id', 'statusname', 'comment');
+            $output = $crud->render();
+            $this->view_output($output);
+
+        } catch (Exception $e) {
+            show_error($e->getMessage() . ' --- ' . $e->getTraceAsString());
+        }
+
+    }
 
 }
 
