@@ -67,6 +67,10 @@ class Servers extends CI_Controller {
             $crud->set_table('servers');
             $crud->set_subject('Servers');
             $crud->required_fields('name');
+            $crud->set_relation_n_n('actors', 'film_actor', 'actor', 'film_id', 'actor_id', 'fullname','priority');
+            $crud->set_relation_n_n('actors', 'film_actor', 'actor', 'film_id', 'actor_id', 'fullname','priority');
+            $crud->set_relation_n_n('actors', 'film_actor', 'actor', 'film_id', 'actor_id', 'fullname','priority');
+            $crud->set_relation_n_n('actors', 'film_actor', 'actor', 'film_id', 'actor_id', 'fullname','priority');
             $crud->columns('id', 'name', 'status', 'project_id', 'internet', 'os_id', 'cpu', 'hdd', 'ip_id', 'admin_id');
             $output = $crud->render();
             $this->view_output($output);
@@ -103,7 +107,7 @@ class Servers extends CI_Controller {
             $crud->set_table('users');
             $crud->set_subject('users');
             $crud->required_fields('login','password','email');
-            $crud->columns('id', 'login', 'email');
+            $crud->columns('user_id', 'login', 'email');
             $output = $crud->render();
             $this->view_output($output);
 
@@ -121,8 +125,13 @@ class Servers extends CI_Controller {
             $crud->set_theme('datatables');
             $crud->set_table('projects');
             $crud->set_subject('projects');
-            $crud->required_fields('name','owner_id');
-            $crud->columns('id', 'name', 'comment');
+            $crud->set_relation('user_id','users','login');
+            $crud->display_as('user_id','Руководитель');
+            $crud->display_as('name','Проект');
+            $crud->display_as('comment','Краткое описание');
+            $crud->display_as('contents','Описание');
+            $crud->required_fields('name','user_id');
+            $crud->columns('project_id', 'name', 'comment');
             $output = $crud->render();
             $this->view_output($output);
 
