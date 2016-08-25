@@ -2,25 +2,7 @@
 
 class Servers extends CI_Controller {
 
-	/**
-	 * Index Page for this controller.
-	 *
-	 * Maps to the following URL
-	 * 		http://example.com/index.php/welcome
-	 *	- or -  
-	 * 		http://example.com/index.php/welcome/index
-	 *	- or -
-	 * Since this controller is set as the default controller in 
-	 * config/routes.php, it's displayed at http://example.com/
-	 *
-	 * So any other public methods not prefixed with an underscore will
-	 * map to /index.php/welcome/<method_name>
-	 * @see http://codeigniter.com/user_guide/general/urls.html
-	 */
-#	public function index()
-#	{
-#		$this->load->view('welcome_message');
-#	}
+
     public function __construct()
     {
         parent::__construct();
@@ -194,9 +176,10 @@ class Servers extends CI_Controller {
             $crud->set_table('workdata');
             $crud->set_subject('workdata');
             $crud->set_relation('server_id','servers','name');
+            $crud->set_relation('service_id','services','name');
             $crud->set_relation('user_id','users','login');
             $crud->required_fields('server_id','user_id','note');
-            $crud->columns('id', 'server_id','user_id','note');
+            $crud->columns('id', 'server_id','service_id','user_id','note');
             $output = $crud->render();
             $this->view_output($output);
 
@@ -225,7 +208,72 @@ class Servers extends CI_Controller {
 
     }
 
+    public function services()
+    {
+        try {
+            $crud = new grocery_CRUD();
+
+            $crud->set_theme('datatables');
+            $crud->set_table('services');
+            $crud->set_subject('Servises');
+            $crud->required_fields('name');
+
+            $crud->set_relation_n_n('Domain', 'domsvckey', 'domains', 'service_id', 'domain_id',  'name');
+            $crud->set_relation_n_n('Admin', 'adminkey', 'users', 'admin_id', 'user_id', 'login');
+            $crud->set_relation_n_n('Owner', 'ownerkey', 'users', 'owner_id', 'user_id', 'login');
+            $crud->columns('service_id', 'name','Domain','Owner');
+            $output = $crud->render();
+            $this->view_output($output);
+
+        } catch (Exception $e) {
+            show_error($e->getMessage() . ' --- ' . $e->getTraceAsString());
+        }
+
+    }
+
+    public function domains()
+    {
+        try {
+            $crud = new grocery_CRUD();
+
+            $crud->set_theme('datatables');
+            $crud->set_table('domains');
+            $crud->set_subject('domains');
+            $crud->set_relation('user_id','users','login');
+            $crud->required_fields('name','expired');
+            $crud->columns('domain_id', 'name', 'expired','user_id');
+            $output = $crud->render();
+            $this->view_output($output);
+
+        } catch (Exception $e) {
+            show_error($e->getMessage() . ' --- ' . $e->getTraceAsString());
+        }
+
+    }
+
+
+    public function wdomains()
+    {
+        try {
+            $crud = new grocery_CRUD();
+
+            #    $crud->set_theme('datatables');
+            $crud->set_table('workdomain');
+            $crud->set_subject('workdomain');
+            $crud->set_relation('domain_id','domains','name');
+ #           $crud->set_relation('ip_id','ipaddress','ip');
+            $crud->set_relation_n_n('ip', 'ipkey', 'ipaddress', 'server_id', 'ip_id', 'ip');
+            $crud->set_relation('service_id','services','name');
+            $crud->required_fields('domains');
+            $crud->columns('wd_id', 'domains');
+            $output = $crud->render();
+            $this->view_output($output);
+
+        } catch (Exception $e) {
+            show_error($e->getMessage() . ' --- ' . $e->getTraceAsString());
+        }
+
+    }
+
 }
 
-/* End of file welcome.php */
-/* Location: ./application/controllers/welcome.php */
