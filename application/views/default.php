@@ -29,6 +29,10 @@ a:hover
 </head>
 <body>
 	<div>
+		<a href='<?php echo site_url('/Servers/services')?>'>Сервисы</a> |
+		<a href='<?php echo site_url('/Servers/domains')?>'>Домены</a> |
+		<a href='<?php echo site_url('/Servers/wdomains')?>'>Домены_1</a> |
+		<a href='<?php echo site_url('/Servers/dnsreg')?>'>Регистраторы</a> |
 		<a href='<?php echo site_url('/Servers/zones')?>'>Зоны</a> |
 		<a href='<?php echo site_url('/Servers/ipaddress')?>'>IP Адреса</a> |
 		<a href='<?php echo site_url('/Servers/manage')?>'>Сервера</a> |
