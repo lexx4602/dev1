@@ -12,7 +12,6 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Services extends CI_Controller {
 
-
     public function __construct()
     {
         parent::__construct();
@@ -54,19 +53,23 @@ class Services extends CI_Controller {
     {
         try {
             $crud = new grocery_CRUD();
+            #$query = parent::db->query('select * from ipaddress');
 
             $crud->set_theme('datatables');
             $crud->set_table('servers');
             $crud->set_subject('Servers');
-            $crud->required_fields('name');
+            $crud->required_fields('servername');
             $crud->set_relation('os_id','os','release');
+
             $crud->set_relation('status_id','status','statusname');
             $crud->set_relation_n_n('projects', 'projectkey', 'projects', 'server_id', 'project_id',  'name');
-            $crud->set_relation_n_n('ip', 'ipkey', 'ipaddress', 'server_id', 'ip_id', 'ip');
-            $crud->set_relation_n_n('Admin', 'adminkey', 'users', 'admin_id', 'user_id', 'login');
-            $crud->set_relation_n_n('Owner', 'ownerkey', 'users', 'owner_id', 'user_id', 'login');
+            $crud->set_relation_n_n('ip', 'mainipkey', 'ipaddress', 'server_id', 'ip_id', 'ip');
+            #  $crud->set_relation_n_n('ip', 'serviphost', 'servers', 'servername', 'servername', 'ip');
+            $crud->set_relation_n_n('hosts', 'hostskey', 'hosts', 'server_id', 'host_id', 'hostname');
+            $crud->set_relation_n_n('Admin', 'adminkey', 'users', 'admin_id', 'user_id', 'Sername');
+            $crud->set_relation_n_n('Owner', 'ownerkey', 'users', 'owner_id', 'user_id', 'Sername');
 
-            $crud->columns('id', 'name', 'ip','projects','status_id',  'internet', 'cpu', 'hdd','Owner','Admin');
+            $crud->columns('id', 'servername', 'ip','projects','status_id',  'internet', 'cpu', 'hdd','Owner','Admin');
             $output = $crud->render();
             $this->view_output($output);
 
@@ -122,7 +125,7 @@ class Services extends CI_Controller {
             $crud->set_theme('datatables');
             $crud->set_table('projects');
             $crud->set_subject('projects');
-            $crud->set_relation('user_id','users','login');
+            $crud->set_relation('user_id','users','Sername');
             $crud->display_as('user_id','Руководитель');
             $crud->display_as('name','Проект');
             $crud->display_as('comment','Краткое описание');
@@ -165,8 +168,9 @@ class Services extends CI_Controller {
             $crud->set_theme('datatables');
             $crud->set_table('troubles');
             $crud->set_subject('troubles');
-            $crud->set_relation('server_id','servers','name');
-            $crud->set_relation('user_id','users','login');
+            $crud->set_relation('server_id','servers','servername');
+            $crud->set_relation('user_id','users','Sername');
+            $crud->set_relation('project_id','projects','name');
             $crud->required_fields('server_id','user_id','trouble');
             $crud->columns('id', 'server_id','user_id','trouble');
             $output = $crud->render();
@@ -185,10 +189,12 @@ class Services extends CI_Controller {
             $crud->set_theme('datatables');
             $crud->set_table('workdata');
             $crud->set_subject('workdata');
-            $crud->set_relation('server_id','servers','name');
+            $crud->set_relation('server_id','servers','servername');
+            $crud->set_relation('service_id','services','servicename');
             $crud->set_relation('user_id','users','login');
+            $crud->set_relation('project_id','projects','name');
             $crud->required_fields('server_id','user_id','note');
-            $crud->columns('id', 'server_id','user_id','note');
+            $crud->columns('id', 'server_id','service_id','user_id','note');
             $output = $crud->render();
             $this->view_output($output);
 
@@ -216,5 +222,96 @@ class Services extends CI_Controller {
         }
 
     }
+
+    public function services()
+    {
+        try {
+            $crud = new grocery_CRUD();
+
+            $crud->set_theme('datatables');
+            $crud->set_table('services');
+            $crud->set_subject('Servises');
+            $crud->required_fields('name');
+            $crud->set_relation_n_n('ip', 'ipkey', 'ipaddress', 'host_id', 'ip_id', 'ip');
+
+            $crud->set_relation('domain_id','domains','name');
+            $crud->set_relation_n_n('Servers', 'srvsrckey', 'servers', 'service_id', 'server_id',  'servername');
+            $crud->set_relation_n_n('Admin', 'adminkey', 'users', 'admin_id', 'user_id', 'Sername');
+            $crud->set_relation_n_n('Owner', 'ownerkey', 'users', 'owner_id', 'user_id', 'Sername');
+            $crud->set_relation_n_n('Project', 'srvprjkey', 'projects','server_id', 'project_id',  'name');
+            $crud->columns('service_id', 'servicename','Hosts','Owner','Project');
+            $output = $crud->render();
+            $this->view_output($output);
+
+        } catch (Exception $e) {
+            show_error($e->getMessage() . ' --- ' . $e->getTraceAsString());
+        }
+
+    }
+
+    public function domains()
+    {
+        try {
+            $crud = new grocery_CRUD();
+
+            $crud->set_theme('datatables');
+            $crud->set_table('domains');
+            $crud->set_subject('domains');
+            $crud->set_relation('user_id','users','login');
+            $crud->set_relation('dnsreg_id','dnsreg','name');
+            $crud->required_fields('name','expired');
+            $crud->columns('domain_id', 'name', 'expired','user_id','dnsreg_id');
+            $output = $crud->render();
+            $this->view_output($output);
+
+        } catch (Exception $e) {
+            show_error($e->getMessage() . ' --- ' . $e->getTraceAsString());
+        }
+
+    }
+
+
+    public function hosts()
+    {
+        try {
+            $crud = new grocery_CRUD();
+
+            $crud->set_theme('datatables');
+            $crud->set_table('hosts');
+            $crud->set_subject('hosts');
+            $crud->set_relation('domain_id','domains','name');
+
+            $crud->set_relation_n_n('ip', 'ipkey', 'ipaddress', 'host_id', 'ip_id', 'ip');
+            $crud->columns('host_id', 'hostname','domain_id','ip');
+            $crud->required_fields('domain_id');
+            $output = $crud->render();
+            $this->view_output($output);
+
+        } catch (Exception $e) {
+            show_error($e->getMessage() . ' --- ' . $e->getTraceAsString());
+        }
+
+    }
+
+
+    public function dnsreg()
+    {
+        try {
+            $crud = new grocery_CRUD();
+
+            $crud->set_theme('datatables');
+            $crud->set_table('dnsreg');
+            $crud->set_subject('dnsreg');
+            $crud->required_fields('name');
+            $crud->columns('dnsreg_id', 'name');
+            $output = $crud->render();
+            $this->view_output($output);
+
+        } catch (Exception $e) {
+            show_error($e->getMessage() . ' --- ' . $e->getTraceAsString());
+        }
+
+    }
+
 
 }

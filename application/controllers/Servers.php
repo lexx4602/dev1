@@ -44,19 +44,23 @@ class Servers extends CI_Controller {
     {
         try {
             $crud = new grocery_CRUD();
+            #$query = parent::db->query('select * from ipaddress');
 
             $crud->set_theme('datatables');
             $crud->set_table('servers');
             $crud->set_subject('Servers');
-            $crud->required_fields('name');
+            $crud->required_fields('servername');
             $crud->set_relation('os_id','os','release');
+
             $crud->set_relation('status_id','status','statusname');
             $crud->set_relation_n_n('projects', 'projectkey', 'projects', 'server_id', 'project_id',  'name');
-            $crud->set_relation_n_n('ip', 'ipkey', 'ipaddress', 'server_id', 'ip_id', 'ip');
+            $crud->set_relation_n_n('ip', 'mainipkey', 'ipaddress', 'server_id', 'ip_id', 'ip');
+          #  $crud->set_relation_n_n('ip', 'serviphost', 'servers', 'servername', 'servername', 'ip');
+            $crud->set_relation_n_n('hosts', 'hostskey', 'hosts', 'server_id', 'host_id', 'hostname');
             $crud->set_relation_n_n('Admin', 'adminkey', 'users', 'admin_id', 'user_id', 'Sername');
             $crud->set_relation_n_n('Owner', 'ownerkey', 'users', 'owner_id', 'user_id', 'Sername');
 
-            $crud->columns('id', 'name', 'ip','projects','status_id',  'internet', 'cpu', 'hdd','Owner','Admin');
+            $crud->columns('id', 'servername', 'ip','projects','status_id',  'internet', 'cpu', 'hdd','Owner','Admin');
             $output = $crud->render();
             $this->view_output($output);
 
@@ -155,8 +159,9 @@ class Servers extends CI_Controller {
             $crud->set_theme('datatables');
             $crud->set_table('troubles');
             $crud->set_subject('troubles');
-            $crud->set_relation('server_id','servers','name');
+            $crud->set_relation('server_id','servers','servername');
             $crud->set_relation('user_id','users','Sername');
+            $crud->set_relation('project_id','projects','name');
             $crud->required_fields('server_id','user_id','trouble');
             $crud->columns('id', 'server_id','user_id','trouble');
             $output = $crud->render();
@@ -175,9 +180,10 @@ class Servers extends CI_Controller {
             $crud->set_theme('datatables');
             $crud->set_table('workdata');
             $crud->set_subject('workdata');
-            $crud->set_relation('server_id','servers','name');
-            $crud->set_relation('service_id','services','name');
+            $crud->set_relation('server_id','servers','servername');
+            $crud->set_relation('service_id','services','servicename');
             $crud->set_relation('user_id','users','login');
+            $crud->set_relation('project_id','projects','name');
             $crud->required_fields('server_id','user_id','note');
             $crud->columns('id', 'server_id','service_id','user_id','note');
             $output = $crud->render();
@@ -217,13 +223,14 @@ class Servers extends CI_Controller {
             $crud->set_table('services');
             $crud->set_subject('Servises');
             $crud->required_fields('name');
+            $crud->set_relation_n_n('ip', 'ipkey', 'ipaddress', 'host_id', 'ip_id', 'ip');
 
-          #  $crud->set_relation_n_n('Domain', 'domsvckey', 'domains', 'service_id', 'domain_id',  'name');
-            $crud->set_relation_n_n('WDomain', 'wdomsvckey', 'workdomain', 'svc_id', 'wd_id',  'domains');
+            $crud->set_relation('domain_id','domains','name');
+            $crud->set_relation_n_n('Servers', 'srvsrckey', 'servers', 'service_id', 'server_id',  'servername');
             $crud->set_relation_n_n('Admin', 'adminkey', 'users', 'admin_id', 'user_id', 'Sername');
             $crud->set_relation_n_n('Owner', 'ownerkey', 'users', 'owner_id', 'user_id', 'Sername');
             $crud->set_relation_n_n('Project', 'srvprjkey', 'projects','server_id', 'project_id',  'name');
-            $crud->columns('service_id', 'name','Domain','Owner');
+            $crud->columns('service_id', 'servicename','Hosts','Owner','Project');
             $output = $crud->render();
             $this->view_output($output);
 
@@ -255,20 +262,19 @@ class Servers extends CI_Controller {
     }
 
 
-    public function wdomains()
+    public function hosts()
     {
         try {
             $crud = new grocery_CRUD();
 
-                $crud->set_theme('datatables');
-            $crud->set_table('workdomain');
-            $crud->set_subject('workdomain');
+            $crud->set_theme('datatables');
+            $crud->set_table('hosts');
+            $crud->set_subject('hosts');
             $crud->set_relation('domain_id','domains','name');
- #           $crud->set_relation('ip_id','ipaddress','ip');
-            $crud->set_relation_n_n('ip', 'ipkey', 'ipaddress', 'server_id', 'ip_id', 'ip');
-            $crud->set_relation('service_id','services','name');
-            $crud->required_fields('domains');
-            $crud->columns('wd_id', 'domains','domain_id');
+
+            $crud->set_relation_n_n('ip', 'ipkey', 'ipaddress', 'host_id', 'ip_id', 'ip');
+            $crud->columns('host_id', 'hostname','domain_id','ip');
+            $crud->required_fields('domain_id');
             $output = $crud->render();
             $this->view_output($output);
 
