@@ -52,7 +52,7 @@ class Servers extends CI_Controller {
             $crud->required_fields('servername');
             $crud->set_relation('os_id','os','release');
 
-            $crud->set_relation('status_id','status','statusname');
+            $crud->set_relation('status_id','srvstatus','statusname');
             $crud->set_relation_n_n('projects', 'projectkey', 'projects', 'server_id', 'project_id',  'name');
             $crud->set_relation_n_n('ip', 'mainipkey', 'ipaddress', 'server_id', 'ip_id', 'ip');
           #  $crud->set_relation_n_n('ip', 'serviphost', 'servers', 'servername', 'servername', 'ip');
