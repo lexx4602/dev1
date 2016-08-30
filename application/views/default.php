@@ -31,7 +31,7 @@ a:hover
 	<div>
 		<a href='<?php echo site_url('/Servers/services')?>'>Сервисы</a> |
 		<a href='<?php echo site_url('/Servers/domains')?>'>Домены</a> |
-		<a href='<?php echo site_url('/Servers/wdomains')?>'>Домены_1</a> |
+		<a href='<?php echo site_url('/Servers/hosts')?>'>Хосты</a> |
 		<a href='<?php echo site_url('/Servers/dnsreg')?>'>Регистраторы</a> |
 		<a href='<?php echo site_url('/Servers/zones')?>'>Зоны</a> |
 		<a href='<?php echo site_url('/Servers/ipaddress')?>'>IP Адреса</a> |
@@ -40,12 +40,17 @@ a:hover
 		<a href='<?php echo site_url('Servers/projects')?>'>Проекты</a> |
 		<a href='<?php echo site_url('Servers/os')?>'>операционные системы</a> |
 		<a href='<?php echo site_url('Servers/troubles')?>'>Проблемы</a> |
-		<a href='<?php echo site_url('Servers/status')?>'>Статус</a> |
+		<a href='<?php echo site_url('Servers/srvstatus')?>'>Статус Серверов</a> |
+		<a href='<?php echo site_url('Servers/taskstatus')?>'>Статус задач</a> |
 		<a href='<?php echo site_url('Servers/workdata')?>'>Работа с серверами</a>
 	</div>
 	<div style='height:20px;'></div>  
     <div>
 		<?php echo $output; ?>
     </div>
+
+
+
+
 </body>
 </html>

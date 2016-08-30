@@ -162,8 +162,9 @@ class Servers extends CI_Controller {
             $crud->set_relation('server_id','servers','servername');
             $crud->set_relation('user_id','users','Sername');
             $crud->set_relation('project_id','projects','name');
+            $crud->set_relation('taststatus_id','taskstatus','statusname');
             $crud->required_fields('server_id','user_id','trouble');
-            $crud->columns('id', 'server_id','user_id','trouble');
+            $crud->columns('id', 'server_id','user_id','trouble','taststatus_id');
             $output = $crud->render();
             $this->view_output($output);
 
@@ -176,16 +177,17 @@ class Servers extends CI_Controller {
     {
         try {
             $crud = new grocery_CRUD();
-
+#taststatus_id
             $crud->set_theme('datatables');
             $crud->set_table('workdata');
             $crud->set_subject('workdata');
             $crud->set_relation('server_id','servers','servername');
             $crud->set_relation('service_id','services','servicename');
             $crud->set_relation('user_id','users','login');
+            $crud->set_relation('taststatus_id','taskstatus','statusname');
             $crud->set_relation('project_id','projects','name');
             $crud->required_fields('server_id','user_id','note');
-            $crud->columns('id', 'server_id','service_id','user_id','note');
+            $crud->columns('id', 'server_id','service_id','user_id','note','taststatus_id');
             $output = $crud->render();
             $this->view_output($output);
 
@@ -195,16 +197,36 @@ class Servers extends CI_Controller {
 
     }
 
-    public function status()
+    public function srvstatus()
     {
         try {
             $crud = new grocery_CRUD();
 
             $crud->set_theme('datatables');
-            $crud->set_table('status');
-            $crud->set_subject('status');
+            $crud->set_table('srvstatus');
+            $crud->set_subject('srvstatus');
             $crud->required_fields('statusname');
             $crud->columns('status_id', 'statusname', 'comment');
+            $output = $crud->render();
+            $this->view_output($output);
+
+        } catch (Exception $e) {
+            show_error($e->getMessage() . ' --- ' . $e->getTraceAsString());
+        }
+
+    }
+
+
+    public function taskstatus()
+    {
+        try {
+            $crud = new grocery_CRUD();
+
+            $crud->set_theme('datatables');
+            $crud->set_table('taskstatus');
+            $crud->set_subject('taskstatus');
+            $crud->required_fields('statusname');
+            $crud->columns('taststatus_id', 'statusname', 'comment');
             $output = $crud->render();
             $this->view_output($output);
 
