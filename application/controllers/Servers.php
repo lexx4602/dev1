@@ -133,15 +133,33 @@ class Servers extends CI_Controller {
     }
 
     public function os()
+{
+    try {
+        $crud = new grocery_CRUD();
+
+        $crud->set_theme('datatables');
+        $crud->set_table('os');
+        $crud->set_subject('os');
+        $crud->required_fields('name','release');
+        $crud->columns('os_id', 'name', 'release');
+        $output = $crud->render();
+        $this->view_output($output);
+
+    } catch (Exception $e) {
+        show_error($e->getMessage() . ' --- ' . $e->getTraceAsString());
+    }
+
+}
+    public function demons()
     {
         try {
             $crud = new grocery_CRUD();
 
             $crud->set_theme('datatables');
-            $crud->set_table('os');
-            $crud->set_subject('os');
-            $crud->required_fields('name','release');
-            $crud->columns('os_id', 'name', 'release');
+            $crud->set_table('demons');
+            $crud->set_subject('Applications');
+            $crud->required_fields('demonname');
+            $crud->columns('demon_id', 'demonname');
             $output = $crud->render();
             $this->view_output($output);
 
@@ -150,6 +168,7 @@ class Servers extends CI_Controller {
         }
 
     }
+
 
     public function troubles()
     {
@@ -247,11 +266,13 @@ class Servers extends CI_Controller {
             $crud->required_fields('name');
             $crud->set_relation_n_n('ip', 'ipkey', 'ipaddress', 'host_id', 'ip_id', 'ip');
 
-            $crud->set_relation('domain_id','domains','name');
+            #$crud->set_relation('domain_id','domains','name');
+            $crud->set_relation('host_id','hosts','hostname');
             $crud->set_relation_n_n('Servers', 'srvsrckey', 'servers', 'service_id', 'server_id',  'servername');
-            $crud->set_relation_n_n('Admin', 'adminkey', 'users', 'admin_id', 'user_id', 'Sername');
-            $crud->set_relation_n_n('Owner', 'ownerkey', 'users', 'owner_id', 'user_id', 'Sername');
+            $crud->set_relation_n_n('Admin', 'svcadmkey', 'users', 'admin_id', 'user_id', 'Sername');
+            $crud->set_relation_n_n('Owner', 'svcownkey', 'users', 'owner_id', 'user_id', 'Sername');
             $crud->set_relation_n_n('Project', 'srvprjkey', 'projects','server_id', 'project_id',  'name');
+            $crud->set_relation_n_n('Application', 'dmnsvckey', 'demons', 'service_id', 'demon_id', 'demonname');
             $crud->columns('service_id', 'servicename','Hosts','Owner','Project');
             $output = $crud->render();
             $this->view_output($output);
@@ -290,6 +311,7 @@ class Servers extends CI_Controller {
             $crud = new grocery_CRUD();
 
             $crud->set_theme('datatables');
+            #$crud->set_theme('twitter-bootstrap');
             $crud->set_table('hosts');
             $crud->set_subject('hosts');
             $crud->set_relation('domain_id','domains','name');

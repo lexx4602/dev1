@@ -41,6 +41,7 @@ a:hover
 		<a href='<?php echo site_url('Servers/os')?>'>операционные системы</a> |
 		<a href='<?php echo site_url('Servers/troubles')?>'>Проблемы</a> |
 		<a href='<?php echo site_url('Servers/srvstatus')?>'>Статус Серверов</a> |
+		<a href='<?php echo site_url('Servers/demons')?>'>Приложения</a> |
 		<a href='<?php echo site_url('Servers/taskstatus')?>'>Статус задач</a> |
 		<a href='<?php echo site_url('Servers/workdata')?>'>Работа с серверами</a>
 	</div>

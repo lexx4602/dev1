@@ -7,3 +7,13 @@ application/cache/*
 application/logs/*
 !application/logs/index.html
 !application/logs/.htaccess
+/dbase/dev1-2016-08-26.sql
+/dbase/dev1.sql
+/dbase/dbase.sql
+/dbase/SQL_query.sql
+/dbase/examples_database.sql
+/dbase/Ipaddress.php
+/dbase/Zones.php
+/dbase/Servers.php
+application/widgets/
+dbase/dev1-2016-08-26.sql

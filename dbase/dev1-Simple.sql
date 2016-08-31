@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: localhost
--- Время создания: Авг 30 2016 г., 18:36
+-- Время создания: Авг 31 2016 г., 19:03
 -- Версия сервера: 5.6.30
 -- Версия PHP: 5.6.21
 
@@ -30,6 +30,59 @@ DROP TABLE IF EXISTS `adminkey`;
 CREATE TABLE `adminkey` (
   `admin_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `demons`
+--
+
+DROP TABLE IF EXISTS `demons`;
+CREATE TABLE `demons` (
+  `demon_id` int(11) NOT NULL,
+  `demonname` varchar(25) NOT NULL,
+  `note` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `demons`
+--
+
+INSERT INTO `demons` (`demon_id`, `demonname`, `note`) VALUES
+(1, 'Nginx', ''),
+(2, 'Apache 2.2', ''),
+(3, 'MySQL', ''),
+(4, 'PostgreSQL', ''),
+(5, 'Tomcat 6', ''),
+(6, 'Tomcat 7', ''),
+(7, 'Zabbix - Agent', ''),
+(8, 'Zabbix - Server', ''),
+(9, 'Alfresco', ''),
+(10, 'Bitrix 24', ''),
+(11, 'Fail2Ban', ''),
+(12, 'Iptables', ''),
+(13, 'Firewalld', ''),
+(14, 'Openssl', ''),
+(15, 'IIS 6.0', ''),
+(16, 'IIs 7.0', ''),
+(17, 'MS SQL Standart', ''),
+(18, 'MS SQL Express', ''),
+(19, 'Active Directory', ''),
+(20, 'AD Federation Service', ''),
+(21, 'Samba', ''),
+(22, 'RedMine', '');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `dmnsvckey`
+--
+
+DROP TABLE IF EXISTS `dmnsvckey`;
+CREATE TABLE `dmnsvckey` (
+  `demon_id` int(11) NOT NULL,
+  `service_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -273,9 +326,7 @@ CREATE TABLE `services` (
   `servicename` varchar(125) NOT NULL,
   `content` text NOT NULL,
   `note` varchar(125) NOT NULL,
-  `hostname` varchar(25) NOT NULL,
-  `domain_id` int(11) NOT NULL,
-  `ip_id` int(11) NOT NULL,
+  `host_id` int(25) NOT NULL,
   `server_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -340,6 +391,30 @@ CREATE TABLE `srvstatus` (
   `statusname` varchar(50) NOT NULL,
   `comment` varchar(255) NOT NULL,
   `data` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `svcadmkey`
+--
+
+DROP TABLE IF EXISTS `svcadmkey`;
+CREATE TABLE `svcadmkey` (
+  `admin_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `svcownkey`
+--
+
+DROP TABLE IF EXISTS `svcownkey`;
+CREATE TABLE `svcownkey` (
+  `owner_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -511,6 +586,19 @@ ALTER TABLE `adminkey`
   ADD KEY `ix_admin` (`admin_id`);
 
 --
+-- Индексы таблицы `demons`
+--
+ALTER TABLE `demons`
+  ADD PRIMARY KEY (`demon_id`);
+
+--
+-- Индексы таблицы `dmnsvckey`
+--
+ALTER TABLE `dmnsvckey`
+  ADD KEY `demon_id` (`demon_id`),
+  ADD KEY `service_id` (`service_id`);
+
+--
 -- Индексы таблицы `dnsreg`
 --
 ALTER TABLE `dnsreg`
@@ -601,6 +689,18 @@ ALTER TABLE `srvstatus`
   ADD PRIMARY KEY (`status_id`);
 
 --
+-- Индексы таблицы `svcadmkey`
+--
+ALTER TABLE `svcadmkey`
+  ADD KEY `ix_admin` (`admin_id`);
+
+--
+-- Индексы таблицы `svcownkey`
+--
+ALTER TABLE `svcownkey`
+  ADD KEY `ix_owner` (`owner_id`);
+
+--
 -- Индексы таблицы `Systems`
 --
 ALTER TABLE `Systems`
@@ -650,6 +750,11 @@ ALTER TABLE `zones`
 --
 
 --
+-- AUTO_INCREMENT для таблицы `demons`
+--
+ALTER TABLE `demons`
+  MODIFY `demon_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+--
 -- AUTO_INCREMENT для таблицы `dnsreg`
 --
 ALTER TABLE `dnsreg`
@@ -663,7 +768,7 @@ ALTER TABLE `domains`
 -- AUTO_INCREMENT для таблицы `hosts`
 --
 ALTER TABLE `hosts`
-  MODIFY `host_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `host_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
 --
 -- AUTO_INCREMENT для таблицы `ipaddress`
 --
