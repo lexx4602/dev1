@@ -25,48 +25,115 @@ a:hover
 {
 	text-decoration: underline;
 }
-#navbar ul {
-	display: none;
-	background-color: #eef6ff;
-	position: absolute;
-	top: 100%;
-}
-#navbar li:hover ul { display: block; }
-#navbar, #navbar ul {
-	margin: 0;
-	padding: 0;
-	list-style-type: none;
-}
-#navbar {
-	height: 30px;
-	background-color: #eaebff;
-	padding-left: 75px;
-	min-width: 470px;
-}
-#navbar li {
-	float: left;
-	position: relative;
-	height: 100%;
-}
-#navbar li a {
+
+
+nav {
 	display: block;
-	padding: 6px;
-	width: 100px;
-	color: #000000;
-	text-decoration: none;
-	text-align: center;
 }
-#navbar ul li { float: none; }
-#navbar li:hover { background-color: #eaebff; }
-#navbar ul li:hover { background-color: #d3d6ff; }
+ul {
+	list-style: none;
+	margin: 5px;
+	padding: 5px;
+}
+a {
+	text-decoration: none;
+	outline: none;
+}
+.topmenu {
+	-webkit-backface-visibility: hidden;
+	-moz-backface-visibility: hidden;
+	backface-visibility: hidden;
+	position: relative;
+	background: rgba(255,255,255,.8);
+}
+.topmenu:before, .topmenu:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+.topmenu li {
+	display: inline-block;
+	position: relative;
+	border: 1px solid #003559;
+}
+.link {
+	font-family: 'Exo 2', sans-serif;
+	display: block;
+	height: 70px;
+	line-height: 70px;
+	padding: 0 30px;
+	font-weight: bold;
+	color: #003559;
+	text-transform: uppercase;
+	-webkit-transition: color 0.4s ease-in-out;
+	-moz-transition: color 0.4s ease-in-out;
+	-o-transition: color 0.4s ease-in-out;
+	transition: color 0.4s ease-in-out;
+}
+.down:after {
+	content:"\f107";
+	margin-left: 8px;
+	font-family: FontAwesome;
+}
+.link:hover {
+	color: #E6855F;
+}
+.submenu {
+	background: white;
+	border: 2px solid #003559;
+	position: absolute;
+	left: 0;
+	visibility: hidden;
+	opacity: 0;
+	z-index: 10;
+	width: 150px;
+	-webkit-transform: perspective(600px) rotateX(-90deg);
+	-moz-transform: perspective(600px) rotateX(-90deg);
+	-ms-transform: perspective(600px) rotateX(-90deg);
+	transform: perspective(600px) rotateX(-90deg);
+	-webkit-transform-origin: 0% 0%;
+	-moz-transform-origin: 0% 0%;
+	-ms-transform-origin: 0% 0%;
+	transform-origin: 0% 0%;
+	-webkit-transition: color 0.4s ease-in-out;
+	-moz-transition: color 0.4s ease-in-out;
+	-o-transition: color 0.4s ease-in-out;
+	transition: 0.6s ease-in-out;
+}
+.submenu > li {
+	display: block;
+}
+.topmenu li:hover > .submenu{
+	visibility: visible;
+	opacity: 1;
+	-webkit-transform: perspective(600px) rotateX(0deg);
+	-moz-transform: perspective(600px) rotateX(0deg);
+	-ms-transform: perspective(600px) rotateX(0deg);
+	transform: perspective(600px) rotateX(0deg);
+}
+.submenu li a {
+	display: block;
+	color: #7f7f7f;
+	font-size: 13px;
+	line-height: 36px;
+	padding: 0 2px;
+	font-family: 'Kurale', serif;
+}
+.submenu li a:hover {
+	color: #E6855F;
+}
+
+
+
 </style>
 </head>
 <body>
 	<div>
 		<div style="position: absolute; z-index:999;">
-			<ul id="navbar" >
-				<li style="width: 120px">Справочники
-				<ul>
+			<nav>
+			<ul class="topmenu" >
+				<li style="width: 150px">Справочники
+				<ul class="submenu">
 					<li><a href='<?php echo site_url('/Servers/domains')?>'>Домены</a></li>
 					<li><a href='<?php echo site_url('/Servers/zones')?>'>Зоны</a></li>
 					<li><a href='<?php echo site_url('/Servers/dnsreg')?>'>Регистраторы</a></li>
@@ -75,10 +142,10 @@ a:hover
 					<li><a href='<?php echo site_url('Servers/srvstatus')?>'>Статус Серверов</a></li>
 					<li><a href='<?php echo site_url('Servers/taskstatus')?>'>Статус задач</a></li>
 					<li><a href='<?php echo site_url('Servers/demons')?>'>Приложения</a> </li>
-					<li><a href='<?php echo site_url('Servers/os')?>'>операционные системы</a></li>
+					<li><a href='<?php echo site_url('Servers/groups')?>'>Группы</a> </li>
 				</ul></li>
-				<li style="width: 120px">Система
-				<ul >
+				<li style="width: 150px">Система
+				<ul class="submenu">
 						<li><a href='<?php echo site_url('/Servers/services')?>'>Сервисы</a></li>
 						<li><a href='<?php echo site_url('/Servers/hosts')?>'>Хосты</a></li>
 						<li><a href='<?php echo site_url('/Servers/manage')?>'>Сервера</a></li>
@@ -86,12 +153,13 @@ a:hover
 						<li><a href='<?php echo site_url('Servers/users')?>'>Пользователи</a></li>
 				</ul >
 				</li>
-				<li style="width: 120px">Работы
-				<ul >
-					<li><a href='<?php echo site_url('Servers/srvstatus')?>'>Статус Серверов</a></li>
+				<li style="width: 150px">Работы
+				<ul class="submenu">
+					<li><a href='<?php echo site_url('Servers/workdata')?>'>Работа с серверами</a></li>
 					<li><a href='<?php echo site_url('Servers/troubles')?>'>Проблемы</a></li>
 				</ul></li>
 			</ul>
+			</nav>
 		</div>
 
 
