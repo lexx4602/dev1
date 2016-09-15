@@ -144,7 +144,7 @@ a {
 					<li><a href='<?php echo site_url('Servers/demons')?>'>Приложения</a> </li>
 					<li><a href='<?php echo site_url('Servers/groups')?>'>Группы</a> </li>
 				</ul></li>
-				<li style="width: 150px">Система
+				<li style="width: 150px"><a href='<?php echo site_url('/Servers/systems')?>'>Система</a>
 				<ul class="submenu">
 						<li><a href='<?php echo site_url('/Servers/services')?>'>Сервисы</a></li>
 						<li><a href='<?php echo site_url('/Servers/hosts')?>'>Хосты</a></li>

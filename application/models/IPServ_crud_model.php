@@ -14,14 +14,24 @@ class IPServ_query_model extends grocery_CRUD_model {
         parent::__construct();
     }
 
-    function get_list() {
-        $query=$this->db->query($this->query_str);
+function servers(){
 
-        $results_array=$query->result();
-        return $results_array;
+}
+
+    function ip(){
+
     }
 
-    public function set_query_str($query_str) {
-        $this->query_str = $query_str;
+    function services(){
+
     }
+
+    function domains(){
+
+    }
+    function hosts(){
+
+    }
+
+
 }

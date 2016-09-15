@@ -26,7 +26,7 @@ class Servers extends CI_Controller {
     {
         try {
             $crud = new grocery_CRUD();
-
+            $crud->unset_edit();
             $crud->set_theme('datatables');
             $crud->set_table('zones');
             $crud->set_subject('zones');
@@ -51,7 +51,7 @@ class Servers extends CI_Controller {
             $crud->set_subject('Servers');
             $crud->required_fields('servername');
             $crud->set_relation('os_id','os','release');
-
+            $crud->field_type('internet','true_false');
             $crud->set_relation('status_id','srvstatus','statusname');
             $crud->set_relation_n_n('projects', 'projectkey', 'projects', 'server_id', 'project_id',  'name');
             $crud->set_relation_n_n('ip', 'mainipkey', 'ipaddress', 'server_id', 'ip_id', 'ip');
@@ -97,8 +97,9 @@ class Servers extends CI_Controller {
             $crud->set_table('users');
             $crud->set_subject('users');
             $crud->set_relation_n_n('Groups', 'key_usrgp', 'groups',  'user_id','group_id', 'groupname');
+            $crud->field_type('password', 'password');
             $crud->required_fields('login','password','email');
-            $crud->add_fields('login','password','email');
+           # $crud->add_fields('login','password','email');
             $crud->columns('user_id', 'login', 'email','sername');
             $output = $crud->render();
             $this->view_output($output);
@@ -153,6 +154,32 @@ class Servers extends CI_Controller {
         }
 
     }
+
+    public function systems()
+    {
+        try {
+            $crud = new grocery_CRUD();
+
+            $crud->set_theme('datatables');
+            $crud->set_table('Systems');
+            $crud->set_subject('Systems');
+            $crud->set_relation_n_n('Projects','key_systprj','projects','system_id','project_id','name');
+            $crud->set_relation_n_n('Owner','key_sysusr','users','system_id','user_id','sername');
+            $crud->set_relation_n_n('Services','key_systsvc','services','system_id','service_id','servicename');
+            $crud->required_fields('systemname','Owner','Projects','Services');
+           #$crud->columns('project_id', 'name', 'comment');
+            $output = $crud->render();
+            $this->view_output($output);
+
+        } catch (Exception $e) {
+            show_error($e->getMessage() . ' --- ' . $e->getTraceAsString());
+        }
+
+    }
+
+
+
+
 
     public function os()
 {
@@ -218,7 +245,7 @@ class Servers extends CI_Controller {
     {
         try {
             $crud = new grocery_CRUD();
-#taststatus_id
+
             $crud->set_theme('datatables');
             $crud->set_table('workdata');
             $crud->set_subject('workdata');
@@ -287,8 +314,6 @@ class Servers extends CI_Controller {
             $crud->set_subject('Servises');
             $crud->required_fields('name');
             $crud->set_relation_n_n('ip', 'key_ip', 'ipaddress', 'host_id', 'ip_id', 'ip');
-
-            #$crud->set_relation('domain_id','domains','name');
             $crud->set_relation('host_id','hosts','hostname');
             $crud->set_relation_n_n('Servers', 'srvsrckey', 'servers', 'service_id', 'server_id',  'servername');
             $crud->set_relation_n_n('Admin', 'svcadmkey', 'users', 'admin_id', 'user_id', 'Sername');
@@ -313,10 +338,10 @@ class Servers extends CI_Controller {
             $crud->set_theme('datatables');
             $crud->set_table('domains');
             $crud->set_subject('domains');
-            $crud->set_relation('user_id','users','login');
+            $crud->set_relation('project_id','projects','name');
             $crud->set_relation('dnsreg_id','dnsreg','name');
             $crud->required_fields('name','expired');
-            $crud->columns('domain_id', 'name', 'expired','user_id','dnsreg_id');
+            $crud->columns('domain_id', 'name', 'expired','project_id','dnsreg_id');
             $output = $crud->render();
             $this->view_output($output);
 
@@ -369,7 +394,6 @@ class Servers extends CI_Controller {
         }
 
     }
-
 
 
 }
