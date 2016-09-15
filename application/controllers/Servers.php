@@ -22,6 +22,10 @@ class Servers extends CI_Controller {
         $this->view_output((object)array('output' => '', 'js_files' => array(), 'css_files' => array()));
     }
 
+
+    /**
+     * Function network zones management
+     */
     public function zones()
     {
         try {
@@ -40,6 +44,10 @@ class Servers extends CI_Controller {
         }
 
     }
+
+    /**
+     * Function Servers management
+     */
     public function manage()
     {
         try {
@@ -69,6 +77,11 @@ class Servers extends CI_Controller {
         }
 
     }
+
+
+    /**
+     * Function ipaddress management
+     */
     public function ipaddress()
     {
         try {
@@ -88,6 +101,10 @@ class Servers extends CI_Controller {
         }
 
     }
+
+    /**
+     *Function users management
+     */
     public function users()
     {
         try {
@@ -108,7 +125,9 @@ class Servers extends CI_Controller {
             show_error($e->getMessage() . ' --- ' . $e->getTraceAsString());
         }
     }
-
+    /**
+     * Function groups management
+     */
     public function groups()
     {
         try {
@@ -130,7 +149,9 @@ class Servers extends CI_Controller {
     }
 
 
-
+    /**
+     * Function projects management
+     */
     public function projects()
     {
         try {
@@ -154,7 +175,9 @@ class Servers extends CI_Controller {
         }
 
     }
-
+    /**
+     *  Function systems management
+     */
     public function systems()
     {
         try {
@@ -177,10 +200,9 @@ class Servers extends CI_Controller {
 
     }
 
-
-
-
-
+    /**
+     *   Function OS types management
+     */
     public function os()
 {
     try {
@@ -199,6 +221,10 @@ class Servers extends CI_Controller {
     }
 
 }
+
+    /**
+     *  Function demons management
+     */
     public function demons()
     {
         try {
@@ -218,7 +244,9 @@ class Servers extends CI_Controller {
 
     }
 
-
+    /**
+     *  Function trouble tickets management
+     */
     public function troubles()
     {
         try {
@@ -241,6 +269,10 @@ class Servers extends CI_Controller {
         }
 
     }
+
+    /**
+     *  Function collection planning work management
+     */
     public function workdata()
     {
         try {
@@ -264,7 +296,9 @@ class Servers extends CI_Controller {
         }
 
     }
-
+    /**
+     *  Function Servers status management
+     */
     public function srvstatus()
     {
         try {
@@ -284,7 +318,9 @@ class Servers extends CI_Controller {
 
     }
 
-
+    /**
+     * Function task status management
+     */
     public function taskstatus()
     {
         try {
@@ -303,7 +339,9 @@ class Servers extends CI_Controller {
         }
 
     }
-
+    /**
+     * Function Services management
+     */
     public function services()
     {
         try {
@@ -329,7 +367,9 @@ class Servers extends CI_Controller {
         }
 
     }
-
+    /**
+     *  Function domains management
+     */
     public function domains()
     {
         try {
@@ -352,6 +392,10 @@ class Servers extends CI_Controller {
     }
 
 
+    /**
+     *  Function hosts management
+     * TODO: ACL support
+     */
     public function hosts()
     {
         try {
@@ -376,6 +420,9 @@ class Servers extends CI_Controller {
     }
 
 
+    /**
+     *  Function DNS registrators management
+     */
     public function dnsreg()
     {
         try {
