@@ -134,15 +134,15 @@ a {
 			<ul class="topmenu" >
 				<li style="width: 150px">Справочники
 				<ul class="submenu">
-					<li><a href='<?php echo site_url('/Servers/domains')?>'>Домены</a></li>
-					<li><a href='<?php echo site_url('/Servers/zones')?>'>Зоны</a></li>
-					<li><a href='<?php echo site_url('/Servers/dnsreg')?>'>Регистраторы</a></li>
-					<li><a href='<?php echo site_url('/Servers/ipaddress')?>'>IP Адреса</a></li>
-					<li><a href='<?php echo site_url('Servers/os')?>'>операционные системы</a></li>
-					<li><a href='<?php echo site_url('Servers/srvstatus')?>'>Статус Серверов</a></li>
-					<li><a href='<?php echo site_url('Servers/taskstatus')?>'>Статус задач</a></li>
-					<li><a href='<?php echo site_url('Servers/demons')?>'>Приложения</a> </li>
-					<li><a href='<?php echo site_url('Servers/groups')?>'>Группы</a> </li>
+					<li><a href='<?php echo site_url('/Lists/domains')?>'>Домены</a></li>
+					<li><a href='<?php echo site_url('/Lists/zones')?>'>Зоны</a></li>
+					<li><a href='<?php echo site_url('/Lists/dnsreg')?>'>Регистраторы</a></li>
+					<li><a href='<?php echo site_url('/Lists/ipaddress')?>'>IP Адреса</a></li>
+					<li><a href='<?php echo site_url('Lists/os')?>'>операционные системы</a></li>
+					<li><a href='<?php echo site_url('Lists/srvstatus')?>'>Статус Серверов</a></li>
+					<li><a href='<?php echo site_url('Lists/taskstatus')?>'>Статус задач</a></li>
+					<li><a href='<?php echo site_url('Lists/demons')?>'>Приложения</a> </li>
+					<li><a href='<?php echo site_url('Lists/groups')?>'>Группы</a> </li>
 				</ul></li>
 				<li style="width: 150px"><a href='<?php echo site_url('/Servers/systems')?>'>Система</a>
 				<ul class="submenu">
@@ -155,8 +155,8 @@ a {
 				</li>
 				<li style="width: 150px">Работы
 				<ul class="submenu">
-					<li><a href='<?php echo site_url('Servers/workdata')?>'>Работа с серверами</a></li>
-					<li><a href='<?php echo site_url('Servers/troubles')?>'>Проблемы</a></li>
+					<li><a href='<?php echo site_url('Works/workdata')?>'>Работа с серверами</a></li>
+					<li><a href='<?php echo site_url('Works/troubles')?>'>Проблемы</a></li>
 				</ul></li>
 			</ul>
 			</nav>

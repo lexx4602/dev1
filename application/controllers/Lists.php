@@ -333,6 +333,26 @@ class Lists extends CI_Controller {
 
     }
 
+    public function ports()
+    {
+        try {
+            $crud = new grocery_CRUD();
+
+            $crud->set_theme('datatables');
+            $crud->set_table('ports');
+            $crud->set_subject('ports');
+            $crud->required_fields('portnum','portname');
+            $crud->columns('portnum', 'portname','type','content');
+            $output = $crud->render();
+            $this->view_output($output);
+
+        } catch (Exception $e) {
+            show_error($e->getMessage() . ' --- ' . $e->getTraceAsString());
+        }
+
+    }
+
+
 
 }
 
