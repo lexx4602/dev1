@@ -143,6 +143,8 @@ a {
 					<li><a href='<?php echo site_url('Lists/taskstatus')?>'>Статус задач</a></li>
 					<li><a href='<?php echo site_url('Lists/demons')?>'>Приложения</a> </li>
 					<li><a href='<?php echo site_url('Lists/groups')?>'>Группы</a> </li>
+					<li><a href='<?php echo site_url('Lists/ports')?>'>Порты</a> </li>
+
 				</ul></li>
 				<li style="width: 150px"><a href='<?php echo site_url('/Servers/systems')?>'>Система</a>
 				<ul class="submenu">
@@ -158,6 +160,11 @@ a {
 					<li><a href='<?php echo site_url('Works/workdata')?>'>Работа с серверами</a></li>
 					<li><a href='<?php echo site_url('Works/troubles')?>'>Проблемы</a></li>
 				</ul></li>
+				<li style="width: 150px">Администрирование
+					<ul class="submenu">
+						<li><a href='<?php echo site_url('Admins/roles')?>'>Роли</a></li>
+						<li><a href='<?php echo site_url('Works/troubles')?>'>Проблемы</a></li>
+					</ul></li>
 			</ul>
 			</nav>
 		</div>

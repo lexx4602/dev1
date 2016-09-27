@@ -358,7 +358,7 @@ class Servers extends CI_Controller {
             $crud->set_relation_n_n('Owner', 'key_svcown', 'users', 'owner_id', 'user_id', 'Sername');
             $crud->set_relation_n_n('Project', 'key_srvprj', 'projects','server_id', 'project_id',  'name');
             $crud->set_relation_n_n('Application', 'key_dmnsvc', 'demons', 'service_id', 'demon_id', 'demonname');
-            $crud->columns('service_id', 'servicename','Hosts','Owner','Project');
+            $crud->columns('service_id', 'servicename','host_id','Owner','Project');
             $output = $crud->render();
             $this->view_output($output);
 
