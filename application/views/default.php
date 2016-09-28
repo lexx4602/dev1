@@ -134,23 +134,25 @@ a {
 			<ul class="topmenu" >
 				<li style="width: 150px">Справочники
 				<ul class="submenu">
-					<li><a href='<?php echo site_url('/Lists/domains')?>'>Домены</a></li>
-					<li><a href='<?php echo site_url('/Lists/zones')?>'>Зоны</a></li>
-					<li><a href='<?php echo site_url('/Lists/dnsreg')?>'>Регистраторы</a></li>
-					<li><a href='<?php echo site_url('/Lists/ipaddress')?>'>IP Адреса</a></li>
+					<li><a href='<?php echo site_url('Lists/domains')?>'>Домены</a></li>
+					<li><a href='<?php echo site_url('Lists/zones')?>'>Зоны</a></li>
+					<li><a href='<?php echo site_url('Lists/dnsreg')?>'>Регистраторы</a></li>
+					<li><a href='<?php echo site_url('Lists/ipaddress')?>'>IP Адреса</a></li>
 					<li><a href='<?php echo site_url('Lists/os')?>'>операционные системы</a></li>
 					<li><a href='<?php echo site_url('Lists/srvstatus')?>'>Статус Серверов</a></li>
 					<li><a href='<?php echo site_url('Lists/taskstatus')?>'>Статус задач</a></li>
 					<li><a href='<?php echo site_url('Lists/demons')?>'>Приложения</a> </li>
 					<li><a href='<?php echo site_url('Lists/groups')?>'>Группы</a> </li>
 					<li><a href='<?php echo site_url('Lists/ports')?>'>Порты</a> </li>
+					<li><a href='<?php echo site_url('Lists/acltype')?>'>Типы доступа</a> </li>
+
 
 				</ul></li>
-				<li style="width: 150px"><a href='<?php echo site_url('/Servers/systems')?>'>Система</a>
+				<li style="width: 150px"><a href='<?php echo site_url('Servers/systems')?>'>Система</a>
 				<ul class="submenu">
-						<li><a href='<?php echo site_url('/Servers/services')?>'>Сервисы</a></li>
-						<li><a href='<?php echo site_url('/Servers/hosts')?>'>Хосты</a></li>
-						<li><a href='<?php echo site_url('/Servers/manage')?>'>Сервера</a></li>
+						<li><a href='<?php echo site_url('Servers/services')?>'>Сервисы</a></li>
+						<li><a href='<?php echo site_url('Servers/hosts')?>'>Хосты</a></li>
+						<li><a href='<?php echo site_url('Servers/manage')?>'>Сервера</a></li>
 						<li><a href='<?php echo site_url('Servers/projects')?>'>Проекты</a></li>
 						<li><a href='<?php echo site_url('Servers/users')?>'>Пользователи</a></li>
 				</ul >
@@ -163,31 +165,23 @@ a {
 				<li style="width: 150px">Администрирование
 					<ul class="submenu">
 						<li><a href='<?php echo site_url('Admins/roles')?>'>Роли</a></li>
-						<li><a href='<?php echo site_url('Works/troubles')?>'>Проблемы</a></li>
+						<li><a href='<?php echo site_url('Admins/users')?>'>Пользователи</a></li>
+						<li><a href='<?php echo site_url('Admins/groups')?>'>Группы</a></li>
 					</ul></li>
 			</ul>
 			</nav>
 		</div>
 
-
-<!--		<a href='<?php echo site_url('/Servers/services')?>'>Сервисы</a> | -->
-<!--		<a href='<?php echo site_url('/Servers/domains')?>'>Домены</a> |  -->
-<!--		<a href='<?php echo site_url('/Servers/hosts')?>'>Хосты</a> | -->
-<!--		<a href='<?php echo site_url('/Servers/dnsreg')?>'>Регистраторы</a> | -->
-<!--		<a href='<?php echo site_url('/Servers/zones')?>'>Зоны</a> | -->
-<!--		<a href='<?php echo site_url('/Servers/ipaddress')?>'>IP Адреса</a> | -->
-<!--		<a href='<?php echo site_url('/Servers/manage')?>'>Сервера</a> | -->
-<!--		<a href='<?php echo site_url('Servers/users')?>'>Пользователи</a> | -->
-<!--		<a href='<?php echo site_url('Servers/projects')?>'>Проекты</a> | -->
-<!--		<a href='<?php echo site_url('Servers/os')?>'>операционные системы</a> | -->
-<!--		<a href='<?php echo site_url('Servers/troubles')?>'>Проблемы</a> | -->
-<!--		<a href='<?php echo site_url('Servers/srvstatus')?>'>Статус Серверов</a> | -->
-<!--		<a href='<?php echo site_url('Servers/demons')?>'>Приложения</a> | -->
-<!--		<a href='<?php echo site_url('Servers/taskstatus')?>'>Статус задач</a> | -->
-<!--		<a href='<?php echo site_url('Servers/workdata')?>'>Работа с серверами</a> -->
 	</div>
 	<div style='height:20px;'></div>  
     <div>
+		<?php
+		echo "<p align='right'>";
+		echo $username = $this->session->userdata('username');
+		echo '<a href="/login/logout">logout</a>';
+		echo "</P>";
+
+		?>
 		<?php echo $output; ?>
     </div>
 

@@ -9,8 +9,18 @@ class Lists extends CI_Controller {
         $this->load->database();
         $this->load->helper('url');
         $this->load->library('grocery_CRUD');
+        $this->is_logged_in();
     }
 
+    function is_logged_in()
+    {
+        $is_logged_in = $this->session->userdata('is_logged_in');
+        if (!isset($is_logged_in) || $is_logged_in != true) {
+            echo 'You don\'t have permission to access this page. <a href="/login">Login</a>';
+            die();
+            //$this->load->view('login_form');
+        }
+    }
 
     public function view_output($output = null)
     {
@@ -281,6 +291,30 @@ class Lists extends CI_Controller {
         }
 
     }
+
+
+    /**
+     *  Function domains management (Lists)
+     */
+    public function acltype()
+    {
+        try {
+            $crud = new grocery_CRUD();
+
+            $crud->set_theme('datatables');
+            $crud->set_table('acltype');
+            $crud->set_subject('ACL Type');
+            $crud->required_fields('acltypename','content');
+            $crud->columns('acltype_id', 'acltypename', 'content');
+            $output = $crud->render();
+            $this->view_output($output);
+
+        } catch (Exception $e) {
+            show_error($e->getMessage() . ' --- ' . $e->getTraceAsString());
+        }
+
+    }
+
 
 
     /**

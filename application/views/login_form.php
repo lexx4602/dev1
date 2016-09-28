@@ -9,6 +9,8 @@
     echo form_password('password','Password');
     echo form_submit('submint','Login');
     echo anchor('login/signup','Create Account');
+
+
 ?>
 </div>
 
