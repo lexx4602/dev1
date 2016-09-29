@@ -9,8 +9,18 @@ class Works extends CI_Controller {
         $this->load->database();
         $this->load->helper('url');
         $this->load->library('grocery_CRUD');
+        $this->is_logged_in();
     }
 
+    function is_logged_in()
+    {
+        $is_logged_in = $this->session->userdata('is_logged_in');
+        if (!isset($is_logged_in) || $is_logged_in != true) {
+            echo 'You don\'t have permission to access this page. <a href="/login">Login</a>';
+            die();
+            //$this->load->view('login_form');
+        }
+    }
 
     public function view_output($output = null)
     {
