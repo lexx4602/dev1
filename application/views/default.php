@@ -179,15 +179,10 @@ a {
     <div>
 		<?php
 		echo "<p align='right'>";
-		if (!$this->session->userdata('session_id')) {
 			echo $username = $this->session->userdata('username');
-
 			echo ' : <a href="/login/logout">logout</a>';
-		}
-		else
-		{
-			echo '<div align="center"><a href="/login/index">login</a></div>';
-		}
+
+
 		echo "</P>";
 
 		?>
