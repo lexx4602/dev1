@@ -48,63 +48,25 @@ class Welcome extends CI_Controller {
 
     public function index()
     {
-        $this->view_output((object)array('output' => '', 'js_files' => array(), 'css_files' => array()));
+
+        $output =' 
+ <div style="align-content:center;">
+ <table border="0"> <tr>
+<td><a href="/Servers/systems"><img src="">Сиситемы</a></td>
+<td><a href="/Servers/projects"><img src="">Проекты</a></td>
+<td><a href="/Servers/services"><img src="">Сервисы</a></td>
+</tr> <tr>
+<td><a href="/Servers/servers"><img src="">Сервера</a></td>
+<td><a href="/Works/workdata"><img src="">Работы</a></td>
+<td><a href="/Works/troubles"><img src="">Проблемы</a></td>
+</tr> <tr>
+<td><a href="/Admins/users"><img src="">Пользователи</a></td>
+<td><a href="/Admins/groups"><img src="">Группы</a></td>
+<td><a href="/Lists"><img src="">Справочники</a></td>
+</tr> </table> </div>';
+        $this->view_output((object)array('output' => $output, 'js_files' => array(), 'css_files' => array()));
     }
 
-    public function zones()
-    {
-        try {
-            $crud = new grocery_CRUD();
-
-            $crud->set_theme('datatables');
-            $crud->set_table('zones');
-            $crud->set_subject('zones');
-            $crud->required_fields('name');
-            $crud->columns('id', 'name','notes');
-            $output = $crud->render();
-            $this->view_output($output);
-
-        } catch (Exception $e) {
-            show_error($e->getMessage() . ' --- ' . $e->getTraceAsString());
-        }
-
-    }
-    public function servers()
-    {
-        try {
-            $crud = new grocery_CRUD();
-
-            $crud->set_theme('datatables');
-            $crud->set_table('servers');
-            $crud->set_subject('Servers');
-            $crud->required_fields('name');
-            $crud->columns('id', 'name', 'status', 'project_id', 'internet', 'os_id', 'cpu', 'hdd', 'ip_id', 'admin_id');
-            $output = $crud->render();
-            $this->view_output($output);
-
-        } catch (Exception $e) {
-            show_error($e->getMessage() . ' --- ' . $e->getTraceAsString());
-        }
-
-    }
-    public function ipaddress()
-    {
-        try {
-            $crud = new grocery_CRUD();
-
-            $crud->set_theme('datatables');
-            $crud->set_table('ipaddress');
-            $crud->set_subject('ipaddress');
-            $crud->required_fields('name','zone_id');
-            $crud->columns('id', 'ip', 'zone_id');
-            $output = $crud->render();
-            $this->view_output($output);
-
-        } catch (Exception $e) {
-            show_error($e->getMessage() . ' --- ' . $e->getTraceAsString());
-        }
-
-    }
 
 }
 

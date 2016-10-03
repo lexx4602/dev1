@@ -29,8 +29,23 @@ class Lists extends CI_Controller {
 
     public function index()
     {
-        $this->view_output((object)array('output' => '', 'js_files' => array(), 'css_files' => array()));
-    }
+        $output =' 
+ <div style="align-content:center;">
+ <table border="0"> <tr>
+<td><a href="/Lists/systems"><img src="">Домены</a></td>
+<td><a href="/Lists/projects"><img src="">Проекты</a></td>
+<td><a href="/Lists/services"><img src="">Сервисы</a></td>
+</tr> <tr>
+<td><a href="/Lists/servers"><img src="">Сервера</a></td>
+<td><a href="/Lists/workdata"><img src="">Работы</a></td>
+<td><a href="/Lists/troubles"><img src="">Проблемы</a></td>
+</tr> <tr>
+<td><a href="/Lists/users"><img src="">Пользователи</a></td>
+<td><a href="/Lists/groups"><img src="">Группы</a></td>
+<td><a href="/Lists"><img src="">Справочники</a></td>
+</tr> </table> </div>';
+        $this->view_output((object)array('output' => $output, 'js_files' => array(), 'css_files' => array()));
+        }
 
 
     /**
