@@ -76,7 +76,7 @@ class Works extends CI_Controller {
             $crud->set_relation('taststatus_id','taskstatus','statusname');
             $crud->set_relation('project_id','projects','name');
             $crud->required_fields('server_id','user_id','note');
-            $crud->columns('id', 'server_id','service_id','user_id','note','taststatus_id');
+            $crud->columns('id', 'server_id','service_id','user_id','note','taskstatus_id');
             $output = $crud->render();
             $this->view_output($output);
 
