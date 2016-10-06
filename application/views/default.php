@@ -180,7 +180,7 @@ a {
 		<?php
 		echo "<p align='right'>";
 			echo $username = $this->session->userdata('username');
-			echo ' : <a href="/login/logout">logout</a>';
+			echo ' : <a href="/Login/logout">logout</a>';
 		echo "</P>";
 		?>
 		<?php echo $output; ?>

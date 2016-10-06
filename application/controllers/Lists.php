@@ -16,7 +16,7 @@ class Lists extends CI_Controller {
     {
         $is_logged_in = $this->session->userdata('is_logged_in');
         if (!isset($is_logged_in) || $is_logged_in != true) {
-            echo 'You don\'t have permission to access this page. <a href="/login">Login</a>';
+            echo 'You don\'t have permission to access this page. <a href="/Login">Login</a>';
             die();
             //$this->load->view('login_form');
         }
@@ -83,7 +83,7 @@ class Lists extends CI_Controller {
             $crud->set_table('groups');
             $crud->set_subject('Groups');
             #  $crud->field_type('groupname', 'readonly');
-            $crud->set_relation_n_n('Groups', 'key_usrgp', 'users', 'group_id', 'user_id', 'Sername');
+            $crud->set_relation_n_n('Groups', 'key_usrgp', 'users', 'group_id', 'user_id', 'sername');
             $crud->required_fields('groupname');
             $crud->columns('group_id', 'groupname', 'note');
             $output = $crud->render();
@@ -153,7 +153,7 @@ class Lists extends CI_Controller {
             $crud->set_theme('datatables');
             $crud->set_table('projects');
             $crud->set_subject('projects');
-            $crud->set_relation('user_id','users','Sername');
+            $crud->set_relation('user_id','users','sername');
             $crud->display_as('user_id','Руководитель');
             $crud->display_as('name','Проект');
             $crud->display_as('comment','Краткое описание');
@@ -177,7 +177,7 @@ class Lists extends CI_Controller {
             $crud = new grocery_CRUD();
 
             $crud->set_theme('datatables');
-            $crud->set_table('Systems');
+            $crud->set_table('systems');
             $crud->set_subject('Systems');
             $crud->set_relation_n_n('Projects','key_systprj','projects','system_id','project_id','name');
             $crud->set_relation_n_n('Owner','key_sysusr','users','system_id','user_id','sername');

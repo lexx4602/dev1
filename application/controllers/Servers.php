@@ -66,8 +66,8 @@ class Servers extends CI_Controller {
             $crud->set_relation_n_n('ip', 'key_mainip', 'ipaddress', 'server_id', 'ip_id', 'ip');
           #  $crud->set_relation_n_n('ip', 'serviphost', 'servers', 'servername', 'servername', 'ip');
             $crud->set_relation_n_n('hosts', 'key_hosts', 'hosts', 'server_id', 'host_id', 'hostname');
-            $crud->set_relation_n_n('Admin', 'key_admin', 'users', 'admin_id', 'user_id', 'Sername');
-            $crud->set_relation_n_n('Owner', 'key_owner', 'users', 'owner_id', 'user_id', 'Sername');
+            $crud->set_relation_n_n('Admin', 'key_admin', 'users', 'admin_id', 'user_id', 'sername');
+            $crud->set_relation_n_n('Owner', 'key_owner', 'users', 'owner_id', 'user_id', 'sername');
 
             $crud->columns('id', 'servername', 'ip','projects','status_id',  'internet', 'cpu', 'hdd','Owner','Admin');
             $output = $crud->render();
@@ -138,7 +138,7 @@ class Servers extends CI_Controller {
             $crud->set_table('groups');
             $crud->set_subject('Groups');
           #  $crud->field_type('groupname', 'readonly');
-            $crud->set_relation_n_n('Groups', 'key_usrgp', 'users', 'group_id', 'user_id', 'Sername');
+            $crud->set_relation_n_n('Groups', 'key_usrgp', 'users', 'group_id', 'user_id', 'sername');
             $crud->required_fields('groupname');
             $crud->columns('group_id', 'groupname', 'note');
             $output = $crud->render();
@@ -161,7 +161,7 @@ class Servers extends CI_Controller {
             $crud->set_theme('datatables');
             $crud->set_table('projects');
             $crud->set_subject('projects');
-            $crud->set_relation('user_id','users','Sername');
+            $crud->set_relation('user_id','users','sername');
             $crud->display_as('user_id','Руководитель');
             $crud->display_as('name','Проект');
             $crud->display_as('comment','Краткое описание');
@@ -185,7 +185,7 @@ class Servers extends CI_Controller {
             $crud = new grocery_CRUD();
 
             $crud->set_theme('datatables');
-            $crud->set_table('Systems');
+            $crud->set_table('systems');
             $crud->set_subject('Systems');
             $crud->set_relation_n_n('Projects','key_systprj','projects','system_id','project_id','name');
             $crud->set_relation_n_n('Owner','key_sysusr','users','system_id','user_id','sername');
@@ -257,7 +257,7 @@ class Servers extends CI_Controller {
             $crud->set_table('troubles');
             $crud->set_subject('troubles');
             $crud->set_relation('server_id','servers','servername');
-            $crud->set_relation('user_id','users','Sername');
+            $crud->set_relation('user_id','users','sername');
             $crud->set_relation('project_id','projects','name');
             $crud->set_relation('taststatus_id','taskstatus','statusname');
             $crud->required_fields('server_id','user_id','trouble');
@@ -345,7 +345,7 @@ class Servers extends CI_Controller {
     {
         $is_logged_in = $this->session->userdata('is_logged_in');
         if (!isset($is_logged_in) || $is_logged_in != true) {
-            echo 'You don\'t have permission to access this page. <a href="/login">Login</a>';
+            echo 'You don\'t have permission to access this page. <a href="/Login">Login</a>';
             die();
             //$this->load->view('login_form');
         }
@@ -366,8 +366,8 @@ class Servers extends CI_Controller {
             $crud->set_relation_n_n('ip', 'key_ip', 'ipaddress', 'host_id', 'ip_id', 'ip');
             $crud->set_relation('host_id','hosts','hostname');
             $crud->set_relation_n_n('Servers', 'key_srvsrc', 'servers', 'service_id', 'server_id',  'servername');
-            $crud->set_relation_n_n('Admin', 'key_svcadm', 'users', 'admin_id', 'user_id', 'Sername');
-            $crud->set_relation_n_n('Owner', 'key_svcown', 'users', 'owner_id', 'user_id', 'Sername');
+            $crud->set_relation_n_n('Admin', 'key_svcadm', 'users', 'admin_id', 'user_id', 'sername');
+            $crud->set_relation_n_n('Owner', 'key_svcown', 'users', 'owner_id', 'user_id', 'sername');
             $crud->set_relation_n_n('Project', 'key_srvprj', 'projects','server_id', 'project_id',  'name');
             $crud->set_relation_n_n('Application', 'key_dmnsvc', 'demons', 'service_id', 'demon_id', 'demonname');
             $crud->columns('service_id', 'servicename','host_id','Owner','Project');

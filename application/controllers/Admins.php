@@ -33,13 +33,13 @@ class Admins extends CI_Controller {
             $crud = new grocery_CRUD();
 
             #$crud->set_theme('datatables');
-            $crud->set_table('Object');
+            $crud->set_table('object');
             $crud->set_subject('Roles');
             $crud->set_relation('lists','acltype','acltypename');
             $crud->set_relation('pages','acltype','acltypename');
             $crud->set_relation('users','acltype','acltypename');
             $crud->set_relation('systems','acltype','acltypename');
-            $crud->set_relation_n_n('system_n', 'key_sysobj', 'Systems',  'object_id','system_id', 'systemname');
+            $crud->set_relation_n_n('system_n', 'key_sysobj', 'systems',  'object_id','system_id', 'systemname');
             $crud->set_relation('servers','acltype','acltypename');
             $crud->set_relation_n_n('Server_n', 'key_srvobj', 'servers',  'object_id','server_id', 'servername');
 
@@ -71,7 +71,7 @@ class Admins extends CI_Controller {
     {
         $is_logged_in = $this->session->userdata('is_logged_in');
         if (!isset($is_logged_in) || $is_logged_in != true) {
-            echo 'You don\'t have permission to access this page. <a href="/login">Login</a>';
+            echo 'You don\'t have permission to access this page. <a href="/Login">Login</a>';
             die();
             //$this->load->view('login_form');
         }
@@ -90,7 +90,7 @@ class Admins extends CI_Controller {
             $crud->set_table('groups');
             $crud->set_subject('Groups');
             #  $crud->field_type('groupname', 'readonly');
-            $crud->set_relation_n_n('Groups', 'key_usrgp', 'users', 'group_id', 'user_id', 'Sername');
+            $crud->set_relation_n_n('Groups', 'key_usrgp', 'users', 'group_id', 'user_id', 'sername');
             $crud->required_fields('groupname');
             $crud->columns('group_id', 'groupname', 'note');
             $output = $crud->render();

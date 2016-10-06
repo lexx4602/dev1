@@ -16,7 +16,7 @@ class Works extends CI_Controller {
     {
         $is_logged_in = $this->session->userdata('is_logged_in');
         if (!isset($is_logged_in) || $is_logged_in != true) {
-            echo 'You don\'t have permission to access this page. <a href="/login">Login</a>';
+            echo 'You don\'t have permission to access this page. <a href="/Login">Login</a>';
             die();
             //$this->load->view('login_form');
         }
@@ -45,7 +45,7 @@ class Works extends CI_Controller {
             $crud->set_table('troubles');
             $crud->set_subject('troubles');
             $crud->set_relation('server_id','servers','servername');
-            $crud->set_relation('user_id','users','Sername');
+            $crud->set_relation('user_id','users','sername');
             $crud->set_relation('project_id','projects','name');
             $crud->set_relation('taststatus_id','taskstatus','statusname');
             $crud->required_fields('server_id','user_id','trouble');
