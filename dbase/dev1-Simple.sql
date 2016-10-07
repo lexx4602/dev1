@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: localhost
--- Время создания: Окт 07 2016 г., 11:52
+-- Время создания: Окт 07 2016 г., 18:38
 -- Версия сервера: 5.6.30
 -- Версия PHP: 5.6.21
 
@@ -34,10 +34,6 @@ CREATE TABLE `acltype` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- СВЯЗИ ТАБЛИЦЫ `acltype`:
---
-
---
 -- Дамп данных таблицы `acltype`
 --
 
@@ -62,10 +58,6 @@ CREATE TABLE `demons` (
   `demonname` varchar(25) NOT NULL,
   `note` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- СВЯЗИ ТАБЛИЦЫ `demons`:
---
 
 --
 -- Дамп данных таблицы `demons`
@@ -110,10 +102,6 @@ CREATE TABLE `dnsreg` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- СВЯЗИ ТАБЛИЦЫ `dnsreg`:
---
-
---
 -- Дамп данных таблицы `dnsreg`
 --
 
@@ -138,10 +126,6 @@ CREATE TABLE `domains` (
   `zoneconfig` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Domain names table';
 
---
--- СВЯЗИ ТАБЛИЦЫ `domains`:
---
-
 -- --------------------------------------------------------
 
 --
@@ -154,12 +138,9 @@ CREATE TABLE `files` (
   `name` varchar(255) NOT NULL,
   `fsname` int(255) NOT NULL,
   `date` datetime NOT NULL,
-  `comment` varchar(255) NOT NULL
+  `comment` varchar(255) NOT NULL,
+  `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- СВЯЗИ ТАБЛИЦЫ `files`:
---
 
 -- --------------------------------------------------------
 
@@ -175,8 +156,14 @@ CREATE TABLE `groups` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- СВЯЗИ ТАБЛИЦЫ `groups`:
+-- Дамп данных таблицы `groups`
 --
+
+INSERT INTO `groups` (`group_id`, `groupname`, `note`) VALUES
+(1, 'Administrators', 'Группа Администраторов'),
+(2, 'View', 'группа просмотра'),
+(3, 'Project DI0219', 'Project DI0219'),
+(4, 'Block', 'Заблокированные пользователи');
 
 -- --------------------------------------------------------
 
@@ -194,10 +181,6 @@ CREATE TABLE `hosts` (
   `register` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- СВЯЗИ ТАБЛИЦЫ `hosts`:
---
-
 -- --------------------------------------------------------
 
 --
@@ -214,10 +197,6 @@ CREATE TABLE `ipaddress` (
   `expired` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- СВЯЗИ ТАБЛИЦЫ `ipaddress`:
---
-
 -- --------------------------------------------------------
 
 --
@@ -229,10 +208,6 @@ CREATE TABLE `key_admin` (
   `admin_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- СВЯЗИ ТАБЛИЦЫ `key_admin`:
---
 
 -- --------------------------------------------------------
 
@@ -246,10 +221,6 @@ CREATE TABLE `key_dmnsvc` (
   `service_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- СВЯЗИ ТАБЛИЦЫ `key_dmnsvc`:
---
-
 -- --------------------------------------------------------
 
 --
@@ -261,10 +232,6 @@ CREATE TABLE `key_hostobj` (
   `host_id` int(11) NOT NULL,
   `object_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- СВЯЗИ ТАБЛИЦЫ `key_hostobj`:
---
 
 -- --------------------------------------------------------
 
@@ -279,8 +246,55 @@ CREATE TABLE `key_hosts` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- СВЯЗИ ТАБЛИЦЫ `key_hosts`:
+-- Дамп данных таблицы `key_hosts`
 --
+
+INSERT INTO `key_hosts` (`host_id`, `server_id`) VALUES
+(4, 1),
+(6, 29),
+(12, 22),
+(7, 1),
+(25, 2),
+(3, 2),
+(23, 2),
+(26, 2),
+(28, 2),
+(24, 2),
+(29, 2),
+(33, 14),
+(34, 14),
+(32, 14),
+(37, 9),
+(42, 9),
+(43, 9),
+(46, 9),
+(35, 9),
+(50, 9),
+(47, 9),
+(48, 9),
+(36, 9),
+(52, 9),
+(51, 9),
+(41, 9),
+(53, 9),
+(40, 9),
+(5, 9),
+(44, 9),
+(54, 9),
+(45, 9),
+(38, 9),
+(49, 9),
+(61, 7),
+(63, 7),
+(56, 7),
+(81, 7),
+(62, 7),
+(59, 7),
+(58, 7),
+(64, 7),
+(57, 7),
+(66, 7),
+(60, 7);
 
 -- --------------------------------------------------------
 
@@ -295,8 +309,48 @@ CREATE TABLE `key_ip` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- СВЯЗИ ТАБЛИЦЫ `key_ip`:
+-- Дамп данных таблицы `key_ip`
 --
+
+INSERT INTO `key_ip` (`host_id`, `ip_id`) VALUES
+(54, 10),
+(54, 42),
+(53, 10),
+(53, 42),
+(45, 10),
+(45, 42),
+(56, 8),
+(57, 8),
+(58, 8),
+(59, 8),
+(60, 8),
+(61, 8),
+(62, 8),
+(63, 8),
+(64, 8),
+(65, 8),
+(66, 8),
+(67, 8),
+(69, 8),
+(70, 8),
+(71, 8),
+(72, 8),
+(73, 8),
+(74, 8),
+(75, 8),
+(76, 8),
+(77, 8),
+(78, 8),
+(79, 8),
+(80, 8),
+(81, 8),
+(38, 10),
+(40, 10),
+(5, 10),
+(6, 67),
+(3, 11),
+(83, 21),
+(7, 21);
 
 -- --------------------------------------------------------
 
@@ -311,8 +365,75 @@ CREATE TABLE `key_mainip` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- СВЯЗИ ТАБЛИЦЫ `key_mainip`:
+-- Дамп данных таблицы `key_mainip`
 --
+
+INSERT INTO `key_mainip` (`server_id`, `ip_id`) VALUES
+(1, 12),
+(1, 44),
+(2, 11),
+(2, 43),
+(3, 1),
+(3, 36),
+(4, 2),
+(4, 37),
+(5, 6),
+(5, 38),
+(6, 7),
+(6, 39),
+(7, 8),
+(7, 40),
+(8, 9),
+(8, 41),
+(9, 10),
+(9, 42),
+(31, 13),
+(31, 45),
+(11, 14),
+(11, 46),
+(12, 15),
+(12, 47),
+(13, 18),
+(13, 48),
+(14, 17),
+(14, 49),
+(15, 19),
+(15, 50),
+(16, 20),
+(16, 51),
+(17, 21),
+(17, 52),
+(18, 22),
+(18, 53),
+(19, 23),
+(19, 54),
+(20, 24),
+(20, 55),
+(21, 25),
+(21, 56),
+(22, 27),
+(22, 57),
+(23, 28),
+(23, 58),
+(24, 29),
+(24, 60),
+(25, 30),
+(25, 61),
+(26, 31),
+(27, 32),
+(28, 33),
+(29, 34),
+(29, 62),
+(30, 35),
+(32, 64),
+(33, 65),
+(34, 66),
+(35, 67),
+(36, 68),
+(37, 69),
+(7, 70),
+(36, 71),
+(37, 72);
 
 -- --------------------------------------------------------
 
@@ -326,26 +447,6 @@ CREATE TABLE `key_owner` (
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- СВЯЗИ ТАБЛИЦЫ `key_owner`:
---
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `key_prjobj`
---
-
-DROP TABLE IF EXISTS `key_prjobj`;
-CREATE TABLE `key_prjobj` (
-  `project_id` int(11) NOT NULL,
-  `object_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- СВЯЗИ ТАБЛИЦЫ `key_prjobj`:
---
-
 -- --------------------------------------------------------
 
 --
@@ -357,10 +458,6 @@ CREATE TABLE `key_project` (
   `project_id` int(11) NOT NULL,
   `server_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- СВЯЗИ ТАБЛИЦЫ `key_project`:
---
 
 -- --------------------------------------------------------
 
@@ -374,10 +471,6 @@ CREATE TABLE `key_sprjsrv` (
   `server_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- СВЯЗИ ТАБЛИЦЫ `key_sprjsrv`:
---
-
 -- --------------------------------------------------------
 
 --
@@ -389,10 +482,6 @@ CREATE TABLE `key_sprjsvc` (
   `supproject_id` int(11) NOT NULL,
   `service_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- СВЯЗИ ТАБЛИЦЫ `key_sprjsvc`:
---
 
 -- --------------------------------------------------------
 
@@ -406,10 +495,6 @@ CREATE TABLE `key_sprjsyst` (
   `system_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- СВЯЗИ ТАБЛИЦЫ `key_sprjsyst`:
---
-
 -- --------------------------------------------------------
 
 --
@@ -421,26 +506,6 @@ CREATE TABLE `key_srchost` (
   `service_id` int(11) DEFAULT NULL,
   `host_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- СВЯЗИ ТАБЛИЦЫ `key_srchost`:
---
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `key_srvobj`
---
-
-DROP TABLE IF EXISTS `key_srvobj`;
-CREATE TABLE `key_srvobj` (
-  `server_id` int(11) NOT NULL,
-  `object_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- СВЯЗИ ТАБЛИЦЫ `key_srvobj`:
---
 
 -- --------------------------------------------------------
 
@@ -455,8 +520,22 @@ CREATE TABLE `key_srvprj` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Server project relation';
 
 --
--- СВЯЗИ ТАБЛИЦЫ `key_srvprj`:
+-- Дамп данных таблицы `key_srvprj`
 --
+
+INSERT INTO `key_srvprj` (`server_id`, `project_id`) VALUES
+(3, 3),
+(2, 1),
+(5, 11),
+(5, 12),
+(5, 13),
+(5, 14),
+(5, 15),
+(5, 16),
+(5, 17),
+(5, 18),
+(5, 19),
+(5, 20);
 
 -- --------------------------------------------------------
 
@@ -470,10 +549,6 @@ CREATE TABLE `key_srvsrc` (
   `server_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- СВЯЗИ ТАБЛИЦЫ `key_srvsrc`:
---
-
 -- --------------------------------------------------------
 
 --
@@ -485,10 +560,6 @@ CREATE TABLE `key_svcadm` (
   `admin_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- СВЯЗИ ТАБЛИЦЫ `key_svcadm`:
---
 
 -- --------------------------------------------------------
 
@@ -502,10 +573,6 @@ CREATE TABLE `key_svcobj` (
   `object_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- СВЯЗИ ТАБЛИЦЫ `key_svcobj`:
---
-
 -- --------------------------------------------------------
 
 --
@@ -517,10 +584,6 @@ CREATE TABLE `key_svcown` (
   `owner_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- СВЯЗИ ТАБЛИЦЫ `key_svcown`:
---
 
 -- --------------------------------------------------------
 
@@ -534,10 +597,6 @@ CREATE TABLE `key_sysobj` (
   `object_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- СВЯЗИ ТАБЛИЦЫ `key_sysobj`:
---
-
 -- --------------------------------------------------------
 
 --
@@ -549,10 +608,6 @@ CREATE TABLE `key_syssrc` (
   `system_id` int(11) DEFAULT NULL,
   `service_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- СВЯЗИ ТАБЛИЦЫ `key_syssrc`:
---
 
 -- --------------------------------------------------------
 
@@ -566,10 +621,6 @@ CREATE TABLE `key_systprj` (
   `project_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- СВЯЗИ ТАБЛИЦЫ `key_systprj`:
---
-
 -- --------------------------------------------------------
 
 --
@@ -581,10 +632,6 @@ CREATE TABLE `key_systsvc` (
   `system_id` int(11) NOT NULL,
   `service_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- СВЯЗИ ТАБЛИЦЫ `key_systsvc`:
---
 
 -- --------------------------------------------------------
 
@@ -598,10 +645,6 @@ CREATE TABLE `key_sysusr` (
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- СВЯЗИ ТАБЛИЦЫ `key_sysusr`:
---
-
 -- --------------------------------------------------------
 
 --
@@ -613,10 +656,6 @@ CREATE TABLE `key_trouble` (
   `serverid` int(11) NOT NULL,
   `troubleid` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- СВЯЗИ ТАБЛИЦЫ `key_trouble`:
---
 
 -- --------------------------------------------------------
 
@@ -630,10 +669,6 @@ CREATE TABLE `key_usrgp` (
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- СВЯЗИ ТАБЛИЦЫ `key_usrgp`:
---
-
 -- --------------------------------------------------------
 
 --
@@ -645,10 +680,6 @@ CREATE TABLE `key_wdomsvc` (
   `wd_id` int(11) NOT NULL,
   `svc_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Domain Services keys';
-
---
--- СВЯЗИ ТАБЛИЦЫ `key_wdomsvc`:
---
 
 -- --------------------------------------------------------
 
@@ -664,10 +695,6 @@ CREATE TABLE `needs` (
   `answer` text,
   `user_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- СВЯЗИ ТАБЛИЦЫ `needs`:
---
 
 -- --------------------------------------------------------
 
@@ -690,10 +717,6 @@ CREATE TABLE `object` (
   `projects` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- СВЯЗИ ТАБЛИЦЫ `object`:
---
-
 -- --------------------------------------------------------
 
 --
@@ -708,26 +731,6 @@ CREATE TABLE `os` (
   `comment` varchar(255) DEFAULT NULL,
   `distrib` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- СВЯЗИ ТАБЛИЦЫ `os`:
---
-
---
--- Дамп данных таблицы `os`
---
-
-INSERT INTO `os` (`os_id`, `name`, `release`, `comment`, `distrib`) VALUES
-(1, 'Linux', 'Centos 7', '0', '0'),
-(2, 'Linux', 'Centos 6.7', NULL, NULL),
-(3, 'Windows', 'Windows 2008', NULL, NULL),
-(4, 'Windows', 'Windows 2012 r2', NULL, NULL),
-(5, 'Linux', 'Ubuntu 14', NULL, NULL),
-(6, 'Linux', 'Ubuntu 16', NULL, NULL),
-(7, 'Linux', 'Ubuntu-12.04.2-server-x64', NULL, NULL),
-(8, 'Windows', 'Windows 7', NULL, NULL),
-(9, 'Linux', 'AltLinux СПТ 6.0', NULL, NULL),
-(10, 'Linux', 'Fedora 16 x 64', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -745,10 +748,6 @@ CREATE TABLE `pages` (
   `owner` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- СВЯЗИ ТАБЛИЦЫ `pages`:
---
-
 -- --------------------------------------------------------
 
 --
@@ -762,10 +761,6 @@ CREATE TABLE `passport` (
   `name` varchar(25) NOT NULL,
   `sername` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- СВЯЗИ ТАБЛИЦЫ `passport`:
---
 
 -- --------------------------------------------------------
 
@@ -781,10 +776,6 @@ CREATE TABLE `ports` (
   `type` enum('TCP','UDP','RTP','SCTP','DCCP') NOT NULL,
   `content` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- СВЯЗИ ТАБЛИЦЫ `ports`:
---
 
 --
 -- Дамп данных таблицы `ports`
@@ -2395,10 +2386,6 @@ CREATE TABLE `projects` (
   `textkey` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- СВЯЗИ ТАБЛИЦЫ `projects`:
---
-
 -- --------------------------------------------------------
 
 --
@@ -2412,9 +2399,21 @@ CREATE TABLE `roles` (
   `comment` varchar(125) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- --------------------------------------------------------
+
 --
--- СВЯЗИ ТАБЛИЦЫ `roles`:
+-- Структура таблицы `scenarios`
 --
+
+DROP TABLE IF EXISTS `scenarios`;
+CREATE TABLE `scenarios` (
+  `scenario_id` int(11) NOT NULL,
+  `name` varchar(125) NOT NULL,
+  `text` text NOT NULL,
+  `created` datetime NOT NULL,
+  `updated` datetime NOT NULL,
+  `user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -2440,10 +2439,6 @@ CREATE TABLE `servers` (
   `lastupdate` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- СВЯЗИ ТАБЛИЦЫ `servers`:
---
-
 -- --------------------------------------------------------
 
 --
@@ -2459,10 +2454,6 @@ CREATE TABLE `services` (
   `host_id` int(25) NOT NULL,
   `server_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- СВЯЗИ ТАБЛИЦЫ `services`:
---
 
 -- --------------------------------------------------------
 
@@ -2491,10 +2482,6 @@ CREATE TABLE `srvstatus` (
   `data` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- СВЯЗИ ТАБЛИЦЫ `srvstatus`:
---
-
 -- --------------------------------------------------------
 
 --
@@ -2507,10 +2494,6 @@ CREATE TABLE `supproject` (
   `projectname` varchar(50) NOT NULL,
   `comment` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- СВЯЗИ ТАБЛИЦЫ `supproject`:
---
 
 -- --------------------------------------------------------
 
@@ -2525,10 +2508,6 @@ CREATE TABLE `systems` (
   `content` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- СВЯЗИ ТАБЛИЦЫ `systems`:
---
-
 -- --------------------------------------------------------
 
 --
@@ -2542,10 +2521,6 @@ CREATE TABLE `taskstatus` (
   `note` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- СВЯЗИ ТАБЛИЦЫ `taskstatus`:
---
-
 -- --------------------------------------------------------
 
 --
@@ -2558,10 +2533,6 @@ CREATE TABLE `todo` (
   `lastdate` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- СВЯЗИ ТАБЛИЦЫ `todo`:
---
-
 -- --------------------------------------------------------
 
 --
@@ -2573,7 +2544,7 @@ CREATE TABLE `troubles` (
   `id` int(11) NOT NULL,
   `server_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `taststatus_id` int(11) NOT NULL,
+  `taskstatus_id` int(11) NOT NULL,
   `trouble` varchar(125) NOT NULL,
   `troublefull` text NOT NULL,
   `solution` text NOT NULL,
@@ -2584,10 +2555,6 @@ CREATE TABLE `troubles` (
   `lefttime` time NOT NULL,
   `parent_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- СВЯЗИ ТАБЛИЦЫ `troubles`:
---
 
 -- --------------------------------------------------------
 
@@ -2606,10 +2573,6 @@ CREATE TABLE `users` (
   `phone` varchar(50) NOT NULL,
   `seats` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- СВЯЗИ ТАБЛИЦЫ `users`:
---
 
 -- --------------------------------------------------------
 
@@ -2633,10 +2596,6 @@ CREATE TABLE `workdata` (
   `lefttime` time NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- СВЯЗИ ТАБЛИЦЫ `workdata`:
---
-
 -- --------------------------------------------------------
 
 --
@@ -2649,10 +2608,6 @@ CREATE TABLE `zones` (
   `name` varchar(30) NOT NULL,
   `notes` varchar(125) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- СВЯЗИ ТАБЛИЦЫ `zones`:
---
 
 --
 -- Дамп данных таблицы `zones`
@@ -2762,13 +2717,6 @@ ALTER TABLE `key_owner`
   ADD KEY `ix_owner` (`owner_id`);
 
 --
--- Индексы таблицы `key_prjobj`
---
-ALTER TABLE `key_prjobj`
-  ADD KEY `project_id` (`project_id`),
-  ADD KEY `object_id` (`object_id`);
-
---
 -- Индексы таблицы `key_project`
 --
 ALTER TABLE `key_project`
@@ -2794,13 +2742,6 @@ ALTER TABLE `key_sprjsvc`
 ALTER TABLE `key_sprjsyst`
   ADD KEY `supproject_id` (`supproject_id`),
   ADD KEY `system_id` (`system_id`);
-
---
--- Индексы таблицы `key_srvobj`
---
-ALTER TABLE `key_srvobj`
-  ADD KEY `server_id` (`server_id`),
-  ADD KEY `object_id` (`object_id`);
 
 --
 -- Индексы таблицы `key_svcadm`
@@ -2909,6 +2850,13 @@ ALTER TABLE `projects`
 --
 ALTER TABLE `roles`
   ADD PRIMARY KEY (`role_id`);
+
+--
+-- Индексы таблицы `scenarios`
+--
+ALTER TABLE `scenarios`
+  ADD PRIMARY KEY (`scenario_id`);
+ALTER TABLE `scenarios` ADD FULLTEXT KEY `text` (`text`);
 
 --
 -- Индексы таблицы `servers`
@@ -3055,6 +3003,11 @@ ALTER TABLE `projects`
 --
 ALTER TABLE `roles`
   MODIFY `role_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT для таблицы `scenarios`
+--
+ALTER TABLE `scenarios`
+  MODIFY `scenario_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT для таблицы `servers`
 --

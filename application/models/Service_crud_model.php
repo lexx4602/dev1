@@ -7,7 +7,7 @@
  */
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class IPServ_query_model extends grocery_CRUD_model {
+class Service_query_model extends grocery_CRUD_model {
 
     private  $query_str = '';
     function __construct() {
