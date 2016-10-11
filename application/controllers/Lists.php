@@ -215,6 +215,30 @@ class Lists extends CI_Controller {
 
 }
 
+
+    /**
+     *   Function OS types management (Lists)
+     */
+    public function price()
+    {
+        try {
+            $crud = new grocery_CRUD();
+
+            $crud->set_theme('datatables');
+            $crud->set_table('price');
+            $crud->set_subject('Price List');
+            $crud->required_fields('key','cost');
+            $crud->columns('key', 'cost', 'comment');
+            $output = $crud->render();
+            $this->view_output($output);
+
+        } catch (Exception $e) {
+            show_error($e->getMessage() . ' --- ' . $e->getTraceAsString());
+        }
+
+    }
+
+
     /**
      *  Function demons management (Lists)
      */

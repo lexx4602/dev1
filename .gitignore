@@ -17,3 +17,7 @@ application/logs/*
 /dbase/Servers.php
 application/widgets/
 dbase/dev1-2016-08-26.sql
+/dbase/dev1-2016-10-07.sql
+adminkey/
+dbase/dev1-2016-10-07.sql
+js/
