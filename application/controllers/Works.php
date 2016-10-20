@@ -96,7 +96,7 @@ class Works extends CI_Controller {
             $crud->set_subject('Scenarios');
             $crud->set_relation('user_id','users','sername');
             $crud->required_fields('server_id','user_id','note');
-            $crud->columns('id', 'server_id','service_id','user_id','note','taskstatus_id');
+            $crud->columns('header','name', 'updated','user_id');
             $output = $crud->render();
             $this->view_output($output);
 

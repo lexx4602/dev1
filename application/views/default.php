@@ -9,6 +9,7 @@ foreach($css_files as $file): ?>
 <?php endforeach; ?>
 <?php foreach($js_files as $file): ?>
 	<script src="<?php echo $file; ?>"></script>
+
 <?php endforeach; ?>
 <style type='text/css'>
 body
@@ -128,7 +129,10 @@ a {
 </style>
 </head>
 <body>
-
+<?php
+//echo base_url();
+#echo $this->dynamic_menu->build_menu();
+?>
 
 	<div>
 		<div style="position: absolute; z-index:999;">
@@ -163,6 +167,7 @@ a {
 				<ul class="submenu">
 					<li><a href='<?php echo site_url('Works/workdata')?>'>Работа с серверами</a></li>
 					<li><a href='<?php echo site_url('Works/troubles')?>'>Проблемы</a></li>
+					<li><a href='<?php echo site_url('Works/scenarios')?>'>Сценарии</a></li>
 				</ul></li>
 				<li style="width: 150px">Администрирование
 					<ul class="submenu">
